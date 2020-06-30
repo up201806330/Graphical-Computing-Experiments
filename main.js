@@ -3,7 +3,11 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 var ctx = canvas.getContext("2d");
 ctx.translate(canvas.width/2, canvas.height/2);
-var speed = 20, growing = true;
+
+var slider = document.getElementById("speedSlider"), growing = true, speed = slider.value;
+slider.addEventListener("change", function() { 
+    speed = slider.value;  
+})
 
 function p5Map(n, start1, stop1, start2, stop2) {
     return ((n-start1)/(stop1-start1))*(stop2-start2)+start2;
@@ -34,7 +38,7 @@ class Star{
         ctx.closePath();
     }
 
-    update(constantSpeed){
+    update(){
         this.z -= speed;
         if (this.z<1){
             this.z=canvas.width;
@@ -42,13 +46,12 @@ class Star{
             this.y = Math.floor(Math.random()*canvas.height*2)-canvas.height;
             this.pz=this.z;
         }
-        if (!constantSpeed) updateSpeed();
     }
 }
 var stars = new Array(); for (var i = 0 ; i < 600 ; i++) stars.push(new Star());
 
-function update(stars, constantSpeed){
-    for (i = 0 ; i < stars.length ; i++) stars[i].update(constantSpeed);
+function update(stars){
+    for (i = 0 ; i < stars.length ; i++) stars[i].update();
 }
 
 function draw(stars){
@@ -63,9 +66,9 @@ function clear(){
     ctx.translate(canvas.width/2, canvas.height/2);
 }
 
-function hyperspace(constantSpeed) {
-    clear();
-    update(stars, constantSpeed);
+function hyperspace() {
+    //clear();
+    update(stars);
     draw(stars);
     window.requestAnimationFrame(hyperspace)
 }
