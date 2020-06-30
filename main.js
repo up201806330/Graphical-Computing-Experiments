@@ -67,20 +67,64 @@ function clear(){
     ctx.fillRect(0,0, canvas.width, canvas.height);
 }
 
-class Ship{
+class Boid{
     constructor(speed){
+        // Coordinates of tip
         this.x = Math.floor(Math.random()*canvas.width);
         this.y = Math.floor(Math.random()*canvas.height);
-        this.d = 10;
-        this.h = 4*this.d * Math.cos(Math.PI / 6);
-        this.n = Math.floor(Math.random()*360);
+
+        // Measurements
+        this.d = 10;                                // Side
+        this.h = 4*this.d * Math.cos(Math.PI / 6);  // Height
+        this.n = Math.floor(Math.random()*360);     // Angle
+
         this.speed = speed;
         this.color = (Math.floor(Math.random()*2) ? "#00E2FF" : "#75EFFF");
+        this.thinkTimer = Math.floor(Math.random()*10);
+        this.friends = new Array();
+
+        this.friendRadius = 50;
+
+    }
+
+    getFriends(){
+        var nearby = new Array();
+        for (var i = 0 ; i < boids.length ; i++){
+            var t = boids[i];
+            if (t==this) continue;
+            if (Math.abs(t.x-this.x) < this.friendRadius && Math.abs(t.y-this.y) < this.friendRadius) nearby.push(t);
+        }
+        this.friends = nearby;
+    }
+
+    getAverageDirection(){
+        var nSum = 0, count = 0;
+
+        for (var i = 0 ; i < this.friends.length ; i++){
+            var t = this.friends[i];
+            var xDistance = Math.abs(this.x - t.x), yDistance = Math.abs(this.y - t.y), 
+            d = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+            if (d > 0 && d < this.friendRadius) {
+                nSum += t.n;
+                count++;
+            }
+        }
+        if (count > 0) nSum = nSum / count;
+        return nSum;
     }
 
     update(){   
+        this.thinkTimer = (this.thinkTimer + 1) % 5;
+        if (this.thinkTimer == 0) this.getFriends();
+
+        // Other factors
+        var avgDir = this.getAverageDirection();
+
+        // Move 
+        this.n -= (this.n - avgDir) / 5;
         this.y -= this.speed*Math.cos(this.n*Math.PI/180);
         this.x += this.speed*Math.sin(this.n*Math.PI/180);
+        // Map Bounds
         if (this.x>canvas.width)    this.x=0;
         if (this.x<0)               this.x=canvas.width;
         if (this.y>canvas.height)   this.y=0;
@@ -92,25 +136,26 @@ class Ship{
         ctx.translate(this.x, this.y);
         ctx.rotate(this.n * Math.PI/180);
 
+        // Boid body
+        ctx.fillStyle = this.color;
+        ctx.fill();
         ctx.beginPath();
         ctx.moveTo(0,0);
         ctx.lineTo(-this.d, this.h);
         ctx.lineTo(this.d, this.h);
         ctx.closePath();
-
-        ctx.fillStyle = this.color;
-        ctx.fill();
+        
         ctx.restore();
     }
 }
-var ships = new Array(); for (var i = 0 ; i < 40 ; i++) ships.push(new Ship(7));
+var boids = new Array(); for (var i = 0 ; i < 100 ; i++) boids.push(new Boid(5));
 
-function updateShips(ships){
-    for (i = 0 ; i < ships.length ; i++) ships[i].update();
+function updateBoids(boids){
+    for (i = 0 ; i < boids.length ; i++) boids[i].update();
 }
 
-function drawShips(ships){
-    for (i = 0 ; i < ships.length ; i++) ships[i].draw();
+function drawBoids(boids){
+    for (i = 0 ; i < boids.length ; i++) boids[i].draw();
 }
 
 function hyperspace() {
@@ -118,8 +163,8 @@ function hyperspace() {
     updateStars(stars);
     drawStars(stars);
     
-    updateShips(ships);
-    drawShips(ships);
+    updateBoids(boids);
+    drawBoids(boids);
 
     window.requestAnimationFrame(hyperspace)
 }
