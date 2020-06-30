@@ -13,8 +13,8 @@ function p5Map(n, start1, stop1, start2, stop2) {
     return ((n-start1)/(stop1-start1))*(stop2-start2)+start2;
 }
 
-function updateSpeed(){
-    speed = Math.cos(Date.now()/5000)*15 + 20;
+function updateSpeed(lowB, upB){
+    speed = Math.cos(Date.now()/5000)*(upB-lowB) + lowB;
 }
 
 class Star{
@@ -22,7 +22,6 @@ class Star{
         this.x = Math.floor(Math.random()*canvas.width*2)-canvas.width;
         this.y = Math.floor(Math.random()*canvas.height*2)-canvas.height;
         this.z = Math.floor(Math.random()*canvas.width);
-        this.pz = this.z;
     }
 
     draw(){
@@ -35,6 +34,7 @@ class Star{
         ctx.arc(sx, sy, 1, 0, r);
         ctx.fillStyle = "#FFFFFF";
         ctx.fill();
+
         ctx.closePath();
     }
 
@@ -44,7 +44,6 @@ class Star{
             this.z=canvas.width;
             this.x = Math.floor(Math.random()*canvas.width*2)-canvas.width;
             this.y = Math.floor(Math.random()*canvas.height*2)-canvas.height;
-            this.pz=this.z;
         }
     }
 }
@@ -67,7 +66,7 @@ function clear(){
 }
 
 function hyperspace() {
-    //clear();
+    clear();
     update(stars);
     draw(stars);
     window.requestAnimationFrame(hyperspace)
