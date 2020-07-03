@@ -84,7 +84,7 @@ class Boid{
         this.friends = new Array();
 
         this.friendRadius = 60;
-        this.crowdRadius = 30;
+        this.crowdRadius = 10;
 
     }
 
@@ -140,7 +140,7 @@ class Boid{
         var noise = Math.floor(Math.random() * 3) - 1;
 
         // Move 
-        this.n -= (this.n - avgDir) / 10 + (avoidDir)  + noise;
+        this.n -= (this.n - avgDir) / 10 + (avoidDir) / 2  + noise;
         this.y -= this.speed*Math.cos(this.n*Math.PI/180);
         this.x += this.speed*Math.sin(this.n*Math.PI/180);
         // Map Bounds
