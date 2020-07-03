@@ -83,7 +83,8 @@ class Boid{
         this.thinkTimer = Math.floor(Math.random()*10);
         this.friends = new Array();
 
-        this.friendRadius = 50;
+        this.friendRadius = 60;
+        this.crowdRadius = 30;
 
     }
 
@@ -113,15 +114,33 @@ class Boid{
         return nSum;
     }
 
-    update(){   
+    getAvoidDir(){
+        var xSum = 0, ySum = 0, count = 0;
+
+        for (var i = 0 ; i < this.friends.length ; i++){
+            var t = this.friends[i];
+            var xDistance = Math.abs(this.x - t.x), yDistance = Math.abs(this.y - t.y), 
+            d = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+            if (d > 0 && d < this.crowdRadius) {
+                xSum += t.x; ySum += t.y;
+                count++;
+            }
+        }
+        if (count > 0) { xSum = xSum / count; ySum = ySum / count; }
+        return Math.atan2(ySum - this.y, this.x - xSum);
+    }
+
+    update(){
         this.thinkTimer = (this.thinkTimer + 1) % 5;
         if (this.thinkTimer == 0) this.getFriends();
 
         // Other factors
         var avgDir = this.getAverageDirection();
+        var avoidDir = this.getAvoidDir();
+        var noise = Math.floor(Math.random() * 3) - 1;
 
         // Move 
-        this.n -= (this.n - avgDir) / 5;
+        this.n -= (this.n - avgDir) / 10 + (avoidDir)  + noise;
         this.y -= this.speed*Math.cos(this.n*Math.PI/180);
         this.x += this.speed*Math.sin(this.n*Math.PI/180);
         // Map Bounds
@@ -148,7 +167,7 @@ class Boid{
         ctx.restore();
     }
 }
-var boids = new Array(); for (var i = 0 ; i < 100 ; i++) boids.push(new Boid(5));
+var boids = new Array(); for (var i = 0 ; i < 100 ; i++) boids.push(new Boid(3));
 
 function updateBoids(boids){
     for (i = 0 ; i < boids.length ; i++) boids[i].update();
