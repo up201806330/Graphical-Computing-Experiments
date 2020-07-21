@@ -83,6 +83,7 @@ class Boid{
 
     draw(){
         ctx.save();
+        
         ctx.translate(this.x, this.y);
         ctx.rotate(this.n * Math.PI/180);
 

@@ -1,5 +1,3 @@
-var canvas = document.getElementById("myCanvas");
-
 var slider = document.getElementById("speedSlider"), growing = true, speed = slider.value;
 function speedTick(){
     speed = slider.value;
@@ -26,7 +24,7 @@ class Star{
 
         var sx = p5Map(this.x/this.z, 0, 1, 0, canvas.width);
         var sy = p5Map(this.y/this.z, 0, 1, 0, canvas.height);
-        var r = p5Map(this.z, 0, canvas.width, 5, 0);
+        var r  = p5Map(this.z, 0, canvas.width, 5, 0);
 
         ctx.arc(sx, sy, 1, 0, r);
         ctx.fillStyle = "#FFFFFF";

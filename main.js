@@ -9,23 +9,11 @@ function p5Map(n, start1, stop1, start2, stop2) {
 
 function clear(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle="black";
+    ctx.fillStyle="grey";
     ctx.fillRect(0,0, canvas.width, canvas.height);
 }
 
-var spaceOn = true;
-var speedChanginOn = true;
-function toggleSpace() {
-    var speed = document.getElementById("speedButton");
-    if (spaceOn){
-        spaceOn = false;
-        speed.style.display = "none"
-    }    
-    else{
-        spaceOn = true;
-        speed.style.display = "inline"
-    }
-}
+var speedChanginOn = false;
 function toggleSpeed(){
     var text = document.getElementById("speedText"), slider = document.getElementById("speedSlider");
     if (speedChanginOn){
@@ -40,7 +28,19 @@ function toggleSpeed(){
         slider.style.display = "none";
     }
 }
-var boidsOn = true;
+var spaceOn = false;
+function toggleSpace() {
+    var speed = document.getElementById("speedButton");
+    if (spaceOn){
+        spaceOn = false;
+        speed.style.display = "none"
+    }    
+    else{
+        spaceOn = true;
+        speed.style.display = "inline"
+    }
+}
+var boidsOn = false;
 function toggleBoids() {
     if (boidsOn)    boidsOn = false;
     else            boidsOn = true;
@@ -48,6 +48,7 @@ function toggleBoids() {
 
 function main() {
     clear();
+
     if (spaceOn){
         if (speedChanginOn) updateSpeed(2, 20);
         updateStars(stars);
@@ -62,6 +63,8 @@ function main() {
     else{ // Resets if toggled off
         boids = new Array(); for (var i = 0 ; i < 100 ; i++) boids.push(new Boid(3));
     }
+
+    squares.draw();
 
     window.requestAnimationFrame(main)
 }
