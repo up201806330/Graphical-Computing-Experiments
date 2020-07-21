@@ -4,25 +4,26 @@
     <meta charset="utf-8" />
     <title>Hyperspace</title>
     <style>
-    	* { padding: 0; margin: 0; }
+    	* { padding: 0; margin: 0; overflow:hidden;}
     	canvas { background: #eee; display: block; margin: 0 auto; }
     </style>
 </head>
 <body>
 
-
 <button type="button" onclick="toggleSpace()">HyperSpace</button>
-    <label for="speed" id="speedText">Speed (between 1 and 50):</label>
-    <input type="range" id="speedSlider" min="1" max="50" value = "1"></input>
+    <button type="button" id="speedButton" onclick="toggleSpeed()">Manual Speed</button>
+    <label for="speed" id="speedText" style="display: none;">Speed (between 1 and 50):</label>
+    <input type="range" id="speedSlider" min="1" max="50" value = "1" style="display: none;"></input>
 
-
-<button type="button" onclick="toggleBoids()">Boids</button>
+<button type="button" onclick="toggleBoids()" style="display: block;">Boids</button>
 
 <!-- <button type="button" id="hyperspace" onclick="toggleSpace()">HyperSpace</button> -->
 
 <canvas id="myCanvas" width="480" height="480"></canvas>
 
 <script src="main.js"></script>
+<script src="stars.js"></script>
+<script src="boids.js"></script>
 <script>
     main();
 </script>
