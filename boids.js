@@ -10,7 +10,7 @@ class Boid{
         this.n = Math.floor(Math.random()*360);     // Angle
 
         this.speed = speed;
-        this.color = (Math.floor(Math.random()*2) ? "#00E2FF" : "#75EFFF");
+        this.color = (Math.floor(Math.random()*2) ? "#000066" : "#00ccff");
         this.thinkTimer = Math.floor(Math.random()*10);
         this.friends = new Array();
 

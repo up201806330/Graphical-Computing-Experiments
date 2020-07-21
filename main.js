@@ -13,17 +13,17 @@ function clear(){
     ctx.fillRect(0,0, canvas.width, canvas.height);
 }
 
-var speedChanginOn = true;
+var autoSpeedOn = true;
 function toggleSpeed(){
     var text = document.getElementById("speedText"), slider = document.getElementById("speedSlider");
-    if (speedChanginOn){
-        speedChanginOn = false;
+    if (autoSpeedOn){
+        autoSpeedOn = false;
         speedTick();
         text.style.display = "inline";
         slider.style.display = "inline";    
     }
     else{
-        speedChanginOn = true;
+        autoSpeedOn = true;
         text.style.display = "none";
         slider.style.display = "none";
     }
@@ -34,7 +34,7 @@ function toggleSpace() {
     if (spaceOn){
         spaceOn = false;
         speed.style.display = "none"
-        if (!speedChanginOn) toggleSpeed();
+        if (!autoSpeedOn) toggleSpeed();
     }    
     else{
         spaceOn = true;
@@ -46,23 +46,36 @@ function toggleBoids() {
     if (boidsOn)    boidsOn = false;
     else            boidsOn = true;
 }
-
-var squaresOn = true;
+var squaresOn = false;
 function toggleSquares(){
-    if (squaresOn)  squaresOn = false;
-    else            squaresOn = true;
+    var dots = document.getElementById("dotsButton");
+    if (squaresOn)  {
+        squaresOn = false;
+        dots.style.display = "none";
+    }
+    else{
+        squaresOn = true;
+        dots.style.display = "inline-block";
+    }            
+}
+var dotsOn = false;
+function toggleDots(){
+    if (dotsOn) dotsOn = false;
+    else        dotsOn = true;
 }
 
 function main() {
     clear();
 
     if (spaceOn){
-        if (speedChanginOn) updateSpeed(2, 20);
+        if (autoSpeedOn) updateSpeed(2, 20);
         updateStars(stars);
         drawStars(stars);
         drawSpeed();
     }
     
+    if (squaresOn) squares.draw();
+
     if (boidsOn){
         updateBoids(boids);
         drawBoids(boids);
@@ -71,7 +84,5 @@ function main() {
         boids = new Array(); for (var i = 0 ; i < 100 ; i++) boids.push(new Boid(3));
     }
 
-    if (squaresOn) squares.draw();
-
-    window.requestAnimationFrame(main)
+    window.requestAnimationFrame(main);
 }

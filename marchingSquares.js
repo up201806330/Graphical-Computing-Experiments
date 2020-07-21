@@ -1,4 +1,4 @@
-var resolution = 14;
+var resolution = 30;
 var increment = 0.06;
 var zOffset = 0; // Time
 noise.seed(Math.random());
@@ -26,19 +26,18 @@ class Squares{
         }
         zOffset += 0.02;
 
-        // for (var i = 0 ; i < cols ; i++){
-        //     for (var j = 0 ; j < rows ; j++){
-        //         ctx.beginPath();
-        //         ctx.arc(i*resolution, j*resolution, 5, 0, 2*Math.PI);
-        //         ctx.fillStyle = "rgb(" + 255*this.field[i][j] + "," + 255*this.field[i][j] + "," + 255*this.field[i][j] + ")";
-        //         ctx.fill();
-        //         ctx.closePath();
-        //     }
-        // }
-
         for (var i = 0 ; i < cols - 1 ; i++){
             var x = i * resolution;
             for (var j = 0 ; j < rows - 1 ; j++){
+
+                if (dotsOn){
+                    ctx.beginPath();
+                    ctx.arc(i*resolution, j*resolution, 5, 0, 2*Math.PI);
+                    ctx.fillStyle = "rgb(" + 255*this.field[i][j] + "," + 255*this.field[i][j] + "," + 255*this.field[i][j] + ")";
+                    ctx.fill();
+                    ctx.closePath(); 
+                }
+
                 var y = j * resolution;
                 
                 var state = this.getState(this.field[i][j], this.field[i + 1][j], this.field[i + 1][j + 1], this.field[i][j + 1]);
