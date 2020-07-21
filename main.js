@@ -177,13 +177,40 @@ function drawBoids(boids){
     for (i = 0 ; i < boids.length ; i++) boids[i].draw();
 }
 
-function hyperspace() {
-    clear();
-    updateStars(stars);
-    drawStars(stars);
-    
-    updateBoids(boids);
-    drawBoids(boids);
+var spaceOn = true;
+function toggleSpace() {
+    var text = document.getElementById("speedText"), slider = document.getElementById("speedSlider");
+    if (spaceOn){
+        spaceOn = false;
+        text.style.display = "none";
+        slider.style.display = "none";
+    }    
+    else{
+        spaceOn = true;
+        text.style.display = "inline";
+        slider.style.display = "inline";
+    }
+}
+var boidsOn = true;
+function toggleBoids() {
+    if (boidsOn)    boidsOn = false;
+    else            boidsOn = true;
+}
 
-    window.requestAnimationFrame(hyperspace)
+function main() {
+    clear();
+    if (spaceOn){
+        updateStars(stars);
+        drawStars(stars);
+    }
+    
+    if (boidsOn){
+        updateBoids(boids);
+        drawBoids(boids);
+    }
+    else{ // Resets if toggled off
+        boids = new Array(); for (var i = 0 ; i < 100 ; i++) boids.push(new Boid(3));
+    }
+
+    window.requestAnimationFrame(main)
 }
