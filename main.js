@@ -9,11 +9,11 @@ function p5Map(n, start1, stop1, start2, stop2) {
 
 function clear(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle="grey";
+    ctx.fillStyle = "black";
     ctx.fillRect(0,0, canvas.width, canvas.height);
 }
 
-var speedChanginOn = false;
+var speedChanginOn = true;
 function toggleSpeed(){
     var text = document.getElementById("speedText"), slider = document.getElementById("speedSlider");
     if (speedChanginOn){
@@ -34,6 +34,7 @@ function toggleSpace() {
     if (spaceOn){
         spaceOn = false;
         speed.style.display = "none"
+        if (!speedChanginOn) toggleSpeed();
     }    
     else{
         spaceOn = true;
@@ -44,6 +45,12 @@ var boidsOn = false;
 function toggleBoids() {
     if (boidsOn)    boidsOn = false;
     else            boidsOn = true;
+}
+
+var squaresOn = true;
+function toggleSquares(){
+    if (squaresOn)  squaresOn = false;
+    else            squaresOn = true;
 }
 
 function main() {
@@ -64,7 +71,7 @@ function main() {
         boids = new Array(); for (var i = 0 ; i < 100 ; i++) boids.push(new Boid(3));
     }
 
-    squares.draw();
+    if (squaresOn) squares.draw();
 
     window.requestAnimationFrame(main)
 }

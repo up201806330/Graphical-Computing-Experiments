@@ -1,13 +1,12 @@
-var resolution = 25;
+var resolution = 14;
+var increment = 0.06;
+var zOffset = 0; // Time
+noise.seed(Math.random());
 var cols = Math.floor(canvas.width / resolution) + 1, rows = Math.floor(canvas.height / resolution) + 1;
 
 class Squares{
     constructor(){
         this.field = new Array(cols); for (var i = 0 ; i < cols ; i++) this.field[i] = new Array(rows);
-        for (var i = 0 ; i < cols ; i++)
-            for (var j = 0 ; j < rows ; j++){
-                this.field[i][j] = Math.random();
-            }
     }
 
     getState(a, b, c, d){
@@ -15,15 +14,27 @@ class Squares{
     }
 
     draw(){
+
+        var xOffset = 0;
         for (var i = 0 ; i < cols ; i++){
+            var yOffset = 0;
+            xOffset  += increment;
             for (var j = 0 ; j < rows ; j++){
-                ctx.beginPath();
-                ctx.arc(i*resolution, j*resolution, 5, 0, 2*Math.PI);
-                ctx.fillStyle = "rgb(" + 255*this.field[i][j] + "," + 255*this.field[i][j] + "," + 255*this.field[i][j] + ")";
-                ctx.fill();
-                ctx.closePath();
+                this.field[i][j] = noise.simplex3(xOffset, yOffset, zOffset);
+                yOffset += increment;
             }
         }
+        zOffset += 0.02;
+
+        // for (var i = 0 ; i < cols ; i++){
+        //     for (var j = 0 ; j < rows ; j++){
+        //         ctx.beginPath();
+        //         ctx.arc(i*resolution, j*resolution, 5, 0, 2*Math.PI);
+        //         ctx.fillStyle = "rgb(" + 255*this.field[i][j] + "," + 255*this.field[i][j] + "," + 255*this.field[i][j] + ")";
+        //         ctx.fill();
+        //         ctx.closePath();
+        //     }
+        // }
 
         for (var i = 0 ; i < cols - 1 ; i++){
             var x = i * resolution;
@@ -38,7 +49,8 @@ class Squares{
 
                 ctx.save();
                 ctx.beginPath();
-                ctx.strokeStyle = "black";
+                ctx.lineWidth = 4;
+                ctx.strokeStyle = "grey";
 
                 switch(Math.round(state)){
                     case 1:
