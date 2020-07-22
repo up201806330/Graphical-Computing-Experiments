@@ -71,7 +71,6 @@ function main() {
         if (autoSpeedOn) updateSpeed(2, 20);
         updateStars(stars);
         drawStars(stars);
-        drawSpeed();
     }
     
     if (squaresOn) squares.draw();
@@ -83,6 +82,8 @@ function main() {
     else{ // Resets if toggled off
         boids = new Array(); for (var i = 0 ; i < 100 ; i++) boids.push(new Boid(3));
     }
+
+    if (spaceOn) drawSpeed();
 
     window.requestAnimationFrame(main);
 }

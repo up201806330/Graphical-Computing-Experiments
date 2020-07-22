@@ -8,21 +8,19 @@
     	canvas { background: #eee; display: block; margin: 0 auto; }
     </style>
 </head>
-<body>
+<body style="background-color: black;">
 
-<button type="button" onclick="toggleSpace()">HyperSpace</button>
-    <button type="button" id="speedButton" onclick="toggleSpeed()" style="display: none;">Manual Speed</button>
-    <label for="speed" id="speedText" style="display: none;">Speed</label>
-    <input type="range" id="speedSlider" min="1" max="50" value = "1" style="display: none;"></input>
+<canvas style="position: absolute; top:0; left:0 solid black;" id="myCanvas" width="480" height="480"></canvas>
 
-<button type="button" onclick="toggleBoids()" style="display: block;">Boids</button>
+<button style="position: relative;" type="button" onclick="toggleSpace()">HyperSpace</button>
+    <button style="position: relative; display: none;" type="button" id="speedButton" onclick="toggleSpeed()">Manual Speed</button>
+    <label for="speed" id="speedText" style="position: relative; display: none;">Speed</label>
+    <input type="range" id="speedSlider" min="1" max="50" value = "1" style="position: relative; display: none;"></input>
 
-<button type="button" onclick="toggleSquares()" style="float: inline-end;">Marching squares</button>
-    <button type="button" id="dotsButton" onclick="toggleDots()" style="display: none;">Dots</button>
+<button type="button" onclick="toggleBoids()" style="position: relative; display: block;">Boids</button>
 
-<canvas id="myCanvas" width="480" height="480"></canvas>
-
-<!-- <img src="construct.jpg" style="float: left;"></div> -->
+<button type="button" onclick="toggleSquares()" style="position: relative; float: inline-end;">Marching squares</button>
+    <button type="button" id="dotsButton" onclick="toggleDots()" style="position: relative; display: none;">Dots</button>
 
 <script src="perlin.js"></script>
 <script src="main.js"></script>
