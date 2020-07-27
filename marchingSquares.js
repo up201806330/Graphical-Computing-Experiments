@@ -28,7 +28,7 @@ class Squares{
                 yOffset += increment;
             }
         }
-        zOffset += 0.02;
+        zOffset += 0.01;
 
         for (var i = 0 ; i < cols - 1 ; i++){
             var x = i * resolution;

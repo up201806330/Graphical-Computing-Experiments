@@ -8,8 +8,6 @@
     	canvas { background: #eee; display: block; margin: 0 auto; }
     </style>
 </head>
-<body style="background-color: black;">
-
 <canvas style="position: absolute; top:0; left:0 solid black;" id="myCanvas" width="480" height="480"></canvas>
 
 <menu id="buttons" style="position: relative;">
@@ -25,6 +23,10 @@
     <button type="button" id="dotsButton" onclick="toggleDots()" style="display: none;">Dots</button>
     <button type="button" id="interpolationButton" onclick="toggleInterpolation()" style="display: none;">Interpolation</button>
 
+<button type="button" onclick="toggleCardioid()" style="display: block;">Cardioid</button>
+    <label for="total" id="totalText" style="display: none;">Number of vertices</label>
+    <input type="range" id="totalSlider" min="10" max="800" value = "100" style="display: none;"></input>
+
 </menu>
 
 <script src="perlin.js"></script>
@@ -32,6 +34,8 @@
 <script src="stars.js"></script>
 <script src="boids.js"></script>
 <script src="marchingSquares.js"></script>
+<script src="cardioid.js"></script>
+<script src="toggles.js"></script>
 <script>
     main();
 </script>
