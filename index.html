@@ -15,7 +15,7 @@
 <button type="button" onclick="toggleSpace()">HyperSpace</button>
     <button style="display: none;" type="button" id="speedButton" onclick="toggleSpeed()">Manual Speed</button>
     <label for="speed" id="speedText" style="display: none;">Speed</label>
-    <input type="range" id="speedSlider" min="1" max="50" value = "1" style="display: none;"></input>
+    <input oninput="speedTick()" type="range" id="speedSlider" min="1" max="50" value = "1" style="display: none;"></input>
 
 <button type="button" onclick="toggleBoids()" style="display: block;">Boids</button>
 
@@ -25,7 +25,7 @@
 
 <button type="button" onclick="toggleCardioid()" style="display: block;">Cardioid</button>
     <label for="total" id="totalText" style="display: none;">Number of vertices</label>
-    <input type="range" id="totalSlider" min="10" max="800" value = "100" style="display: none;"></input>
+    <input oninput="totalTick()" type="range" id="totalSlider" min="10" max="800" value = "100" style="display: none;"></input>
 
 </menu>
 

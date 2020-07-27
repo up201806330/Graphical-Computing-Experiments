@@ -1,8 +1,7 @@
-var slider = document.getElementById("speedSlider"), speed = slider.value;
+var speedSlider = document.getElementById("speedSlider"), speed = speedSlider.value;
 function speedTick(){
-    speed = slider.value;
+    speed = speedSlider.value;
 }
-slider.addEventListener("change", speedTick);   
     
 function updateSpeed(lowB, upB){
     speed = Math.cos(Date.now()/6000)*(upB-lowB)/2 + (upB+lowB)/2;

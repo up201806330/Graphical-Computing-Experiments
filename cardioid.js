@@ -1,15 +1,15 @@
-var factor = 2;
-var r = canvas.width/4;
-
-var slider = document.getElementById("totalSlider"), total = slider.value;
+var totalSlider = document.getElementById("totalSlider"), total = totalSlider.value;
 function totalTick(){
-    total = slider.value;
+    total = totalSlider.value;
 }
-slider.addEventListener("change", totalTick);   
 
 function updateFactor(lowB, upB){
     factor = Math.cos(Date.now()/10000)*(upB-lowB)/2 + (upB+lowB)/2;
 }
+
+var factor = 2;
+var r = canvas.width/4;
+
 
 class Cardioid{
     draw(){
