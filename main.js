@@ -37,7 +37,8 @@ function main() {
         cardioid.draw();
     }
 
-    if (spaceOn) drawSpeed();
+    if (spaceOn)    drawSpeed();
+    if (cardioidOn) drawFactor();
 
     window.requestAnimationFrame(main);
 }

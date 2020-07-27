@@ -40,3 +40,11 @@ class Cardioid{
     }
 }
 cardioid = new Cardioid();
+
+function drawFactor() {
+    var ctx = canvas.getContext("2d");
+    ctx.font = "25px Times New Roman";
+    ctx.fillStyle = "white";
+    ctx.textAlign = "left";
+    ctx.fillText(Math.round(factor*100)/100, canvas.width - 70, 30);   
+}
