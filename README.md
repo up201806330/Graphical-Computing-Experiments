@@ -4,4 +4,6 @@
 
 Graphical computing experiments
 - Starfield simulation with interactive speed
-- "Boid" entities 
+- Boid entities 
+- Animated Marching squares on perlin noise field
+- Animated cardioid
