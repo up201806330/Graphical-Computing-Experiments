@@ -1,5 +1,5 @@
-var resolution = 30;
-var increment = 0.06;
+var resolution = 15;
+var increment = 0.045;
 var zOffset = 0; // Time
 noise.seed(Math.random());
 var cols = Math.floor(canvas.width / resolution) + 1, rows = Math.floor(canvas.height / resolution) + 1;
