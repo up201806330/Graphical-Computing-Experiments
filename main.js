@@ -49,19 +49,27 @@ function toggleBoids() {
 var squaresOn = false;
 function toggleSquares(){
     var dots = document.getElementById("dotsButton");
+    var interpolation = document.getElementById("interpolationButton")
     if (squaresOn)  {
         squaresOn = false;
         dots.style.display = "none";
+        interpolation.style.display = "none";
     }
     else{
         squaresOn = true;
         dots.style.display = "inline-block";
+        interpolation.style.display = "inline-block";
     }            
 }
 var dotsOn = false;
 function toggleDots(){
     if (dotsOn) dotsOn = false;
     else        dotsOn = true;
+}
+var interpolationOn = false;
+function toggleInterpolation(){
+    if (interpolationOn) interpolationOn = false;
+    else                 interpolationOn = true;
 }
 
 function main() {

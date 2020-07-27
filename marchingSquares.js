@@ -4,6 +4,10 @@ var zOffset = 0; // Time
 noise.seed(Math.random());
 var cols = Math.floor(canvas.width / resolution) + 1, rows = Math.floor(canvas.height / resolution) + 1;
 
+function lerp(a, b, t){
+    return  a + (b - a) * t;
+}
+
 class Squares{
     constructor(){
         this.field = new Array(cols); for (var i = 0 ; i < cols ; i++) this.field[i] = new Array(rows);
@@ -29,6 +33,7 @@ class Squares{
         for (var i = 0 ; i < cols - 1 ; i++){
             var x = i * resolution;
             for (var j = 0 ; j < rows - 1 ; j++){
+                var y = j * resolution;
 
                 if (dotsOn){
                     ctx.beginPath();
@@ -38,14 +43,34 @@ class Squares{
                     ctx.closePath(); 
                 }
 
-                var y = j * resolution;
                 
-                var state = this.getState(this.field[i][j], this.field[i + 1][j], this.field[i + 1][j + 1], this.field[i][j + 1]);
-                var ax = x + resolution * 0.5,  ay = y;
-                var bx = x + resolution,        by = y + resolution * 0.5;
-                var cx = x + resolution * 0.5,  cy = y + resolution;
-                var dx = x,                     dy = y + resolution * 0.5;
+                var state = this.getState(Math.ceil(this.field[i][j]), Math.ceil(this.field[i + 1][j]), Math.ceil(this.field[i + 1][j + 1]), Math.ceil(this.field[i][j + 1]));
+                
+                if (interpolationOn){ 
+                    var aVal = this.field[i    ][j    ] + 1;
+                    var bVal = this.field[i + 1][j    ] + 1;
+                    var cVal = this.field[i + 1][j + 1] + 1;
+                    var dVal = this.field[i    ][j + 1] + 1;
 
+                    var t = (1 - aVal) / (bVal - aVal);
+                    var ax = lerp(x, x + resolution, t), ay = y;
+
+                    t = (1 - bVal) / (cVal - bVal);
+                    var bx = x + resolution, by = lerp(y, y + resolution, t);
+
+                    t = (1 - dVal) / (cVal - dVal);
+                    var cx = lerp(x, x + resolution, t), cy = y + resolution;
+
+                    t = (1 - aVal) / (dVal - aVal);
+                    var dx = x, dy = lerp(y, y + resolution, t);
+                } 
+                else {
+                    var ax = x + resolution * 0.5,  ay = y;
+                    var bx = x + resolution,        by = y + resolution * 0.5;
+                    var cx = x + resolution * 0.5,  cy = y + resolution;
+                    var dx = x,                     dy = y + resolution * 0.5;
+                }
+                
                 ctx.save();
                 ctx.beginPath();
                 ctx.lineWidth = 4;
