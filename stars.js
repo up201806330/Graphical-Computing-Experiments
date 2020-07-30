@@ -43,11 +43,11 @@ class Star{
 }
 var stars = new Array(); for (var i = 0 ; i < 600 ; i++) stars.push(new Star());
 
-function updateStars(stars){
+function updateStars(){
     for (i = 0 ; i < stars.length ; i++) stars[i].update();
 }
 
-function drawStars(stars){
+function drawStars(){
     for (i = 0 ; i < stars.length ; i++) stars[i].draw();
 }
 

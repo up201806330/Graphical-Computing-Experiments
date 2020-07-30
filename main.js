@@ -18,18 +18,18 @@ function main() {
 
     if (spaceOn){
         if (autoSpeedOn) updateSpeed(2, 20);
-        updateStars(stars);
-        drawStars(stars);
+        updateStars();
+        drawStars();
     }
     
     if (squaresOn) squares.draw();
 
     if (boidsOn){
-        updateBoids(boids);
-        drawBoids(boids);
+        updateBoids();
+        drawBoids();
     }
     else{ // Resets if toggled off
-        boids = new Array(); for (var i = 0 ; i < 100 ; i++) boids.push(new Boid(3));
+        boids = new Array(); for (var i = 0 ; i < 20 ; i++) boids.push(new Boid());
     }
 
     if (cardioidOn) {
