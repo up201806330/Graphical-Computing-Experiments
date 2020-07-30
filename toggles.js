@@ -64,10 +64,14 @@ function toggleCardioid(){
         totalTick();
         text.style.display = "none";
         slider.style.display = "none";
+        obstacles = new Array();
     }
-    else            {
+    else {
         cardioidOn = true;
         text.style.display = "inline";
         slider.style.display = "inline";  
+
+        // Add obstacle for boids
+        obstacles.push(new Obstacle(canvas.width/2, canvas.height/2, 270, true));
     }
 }

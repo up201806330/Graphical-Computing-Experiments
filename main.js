@@ -3,10 +3,6 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 var ctx = canvas.getContext("2d");
 
-function p5Map(n, start1, stop1, start2, stop2) {
-    return ((n-start1)/(stop1-start1))*(stop2-start2)+start2;
-}
-
 function clear(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "black";
@@ -29,7 +25,8 @@ function main() {
         drawBoids();
     }
     else{ // Resets if toggled off
-        boids = new Array(); for (var i = 0 ; i < 20 ; i++) boids.push(new Boid());
+        boids = new Array(); for (var i = 0 ; i < 100 ; i++) boids.push(new Boid());
+        obstacles = new Array();
     }
 
     if (cardioidOn) {
