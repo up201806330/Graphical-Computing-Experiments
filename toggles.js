@@ -72,6 +72,6 @@ function toggleCardioid(){
         slider.style.display = "inline";  
 
         // Add obstacle for boids
-        obstacles.push(new Obstacle(canvas.width/2, canvas.height/2, 270, true));
+        obstacles.push(new Obstacle(canvas.width/2, canvas.height/2, 135, true));
     }
 }

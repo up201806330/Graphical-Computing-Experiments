@@ -126,7 +126,7 @@ class Boid{
         forces.push(this.getAverageDirection(). mult(1));
         forces.push(this.getAvoidDir().         mult(1));
         forces.push(this.getCohesionDir().      mult(0.005));
-        forces.push(this.getObstacleDir().      mult(2));
+        forces.push(this.getObstacleDir().      mult(3));
         forces.push(this.getNoiseDir().         mult(0.01));
         
         for (var i = 0 ; i < forces.length ; i++) this.v.add(forces[i]);
@@ -165,7 +165,7 @@ class Obstacle{
     constructor(x, y, size, transparent = false){
         this.u = new vec2(x, y);
         if (!transparent) this.color = "#660000";
-        else              this.color = "rgba(0,0,0,0.6)";
+        else              this.color = "rgba(0,0,0,0)";
         this.size = size
     }
 
