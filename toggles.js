@@ -68,8 +68,8 @@ function toggleCardioid(){
     }
     else {
         cardioidOn = true;
-        text.style.display = "inline";
-        slider.style.display = "inline";  
+        text.style.display = "inline-block";
+        slider.style.display = "inline-block";  
 
         // Add obstacle for boids
         obstacles.push(new Obstacle(canvas.width/2, canvas.height/2, 135, true));
@@ -77,9 +77,38 @@ function toggleCardioid(){
 }
 var flowFieldOn = false;
 function toggleFlowField(){
-    if (flowFieldOn) flowFieldOn = false;
+    var particleSpeedtext = document.getElementById("particleSpeedText"), particleSpeedslider = document.getElementById("particleSpeedSlider"), 
+    vectors = document.getElementById("vectorsButton"), 
+    timeIncrementText = document.getElementById("timeIncrementText"), timeIncrementSlider = document.getElementById("timeIncrementSlider");
+    if (flowFieldOn){
+        flowFieldOn = false;
+        particleSpeedTick();
+        particleSpeedtext.style.display = "none";
+        particleSpeedslider.style.display = "none";
+
+        vectors.style.display = "none";
+
+        timeIncrementText.style.display = "none";
+        timeIncrementSlider.style.display = "none";
+    }
     else {
         flowFieldOn = true;
         newField();
-    }            
+        particleSpeedtext.style.display = "inline-block";
+        particleSpeedslider.style.display = "inline-block";  
+
+        vectors.style.display = "inline-block";  
+
+        timeIncrementText.style.display = "inline-block";  
+        timeIncrementSlider.style.display = "inline-block";    
+    }             
+}
+var vectorsOn = false;
+function toggleVectors(){
+    if (vectorsOn){
+        vectorsOn = false;
+    }
+    else {
+        vectorsOn = true; 
+    } 
 }

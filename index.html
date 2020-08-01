@@ -12,24 +12,44 @@
 oncontextmenu="return false;"></canvas>
 
 <menu id="buttons" style="position: relative;">
-
+<div class="SPACE" style="display: inline-flex;">
 <button type="button" onclick="toggleSpace()">HyperSpace</button>
     <button style="display: none;" type="button" id="speedButton" onclick="toggleSpeed()">Manual Speed</button>
+
     <label for="speed" id="speedText" style="display: none;">Speed</label>
     <input oninput="speedTick()" type="range" id="speedSlider" min="1" max="50" value = "1" style="display: none;"></input>
+</div>
 
-<button type="button" onclick="toggleBoids()" style="display: block;">Boids</button>
+<div class="BOIDS" style="display: block;">
+    <button type="button" onclick="toggleBoids()">Boids</button>
+</div>
 
-<button type="button" onclick="toggleSquares()" style="float: inline-end;">Marching squares</button>
+<div class="SQUARES">
+<button type="button" onclick="toggleSquares()">Marching squares</button>
     <button type="button" id="dotsButton" onclick="toggleDots()" style="display: none;">Dots</button>
-    <button type="button" id="interpolationButton" onclick="toggleInterpolation()" style="display: none;">Interpolation</button>
 
-<button type="button" onclick="toggleCardioid()" style="display: block;">Cardioid</button>
+    <button type="button" id="interpolationButton" onclick="toggleInterpolation()" style="display: none;">Interpolation</button>
+</div>
+
+<div class="CARDIOID">
+<button type="button" onclick="toggleCardioid()" >Cardioid</button>
     <label for="total" id="totalText" style="display: none;">Number of vertices</label>
     <input oninput="totalTick()" type="range" id="totalSlider" min="10" max="800" value = "100" style="display: none;"></input>
+</div>
 
-<button type="button" onclick="toggleFlowField()" style="display: block;">Flow Field</button>
+<div class="FLOW" style="display: inline-flex;">
+<button type="button" onclick="toggleFlowField()">Flow Field</button>
+    <button style="display: none;" type="button" id="vectorsButton" onclick="toggleVectors()">Show Vectors</button>
+
+    <label for="timeIncrement" id="timeIncrementText" style="display: none;">Field time increment</label>
+    <input oninput="timeIncrementTick()" type="range" id="timeIncrementSlider" min="0" max="0.02" value = "0" step="0.001" style="display: none;"></input>
+
+    <label for="particleSpeed" id="particleSpeedText" style="display: none;">Max Particle Speed</label>
+    <input oninput="particleSpeedTick()" type="range" id="particleSpeedSlider" min="5" max="20" value = "5" style="display: none;"></input>
+</div>
 </menu>
+
+
 
 <script src="perlin.js"></script>
 <script src="utils.js"></script>

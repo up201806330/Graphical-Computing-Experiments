@@ -1,8 +1,19 @@
 var resolution = 15;
 var increment = 0.045;
-var zOffset = 0; // Time
+var zOffset = 0;
+var colorOffset = 0;
 noise.seed(Math.random());
 var cols = Math.floor(canvas.width / resolution) + 1, rows = Math.floor(canvas.height / resolution) + 1;
+
+var particleSpeedSlider = document.getElementById("particleSpeedSlider"), particleSpeed = particleSpeedSlider.value;
+function particleSpeedTick(){
+    particleSpeed = particleSpeedSlider.value;
+}
+
+var timeIncrementSlider = document.getElementById("timeIncrementSlider"), timeIncrement = timeIncrementSlider.value;
+function timeIncrementTick(){
+    timeIncrement = timeIncrementSlider.value;
+}
 
 class FlowField{
     constructor(){
@@ -30,16 +41,23 @@ class FlowField{
             for (var j = 0; j < rows; j++) {
                 var index = i + j * cols;
                 let y = j * resolution;
-                ctx.beginPath();
-                ctx.moveTo(x, y);
-                ctx.lineTo(x + this.field[index].x * resolution, y + this.field[index].y * resolution);
-                ctx.strokeStyle = "rgba(" + 255 + "," + 255 + "," + 255 + "," + 0.3 + ")";
-                ctx.stroke();
-                ctx.closePath();
+
+                if (timeIncrement > 0) this.field[index] = vec2.fromAngle(noise.simplex3(xOffset, yOffset, zOffset)*360).mult(1);
+
+                if (vectorsOn){
+                    ctx.beginPath();
+                    ctx.moveTo(x, y);
+                    ctx.lineTo(x + this.field[index].x * resolution, y + this.field[index].y * resolution);
+                    ctx.strokeStyle = "rgba(" + 255 + "," + 255 + "," + 255 + "," + 0.3 + ")";
+                    ctx.stroke();
+                    ctx.closePath();
+                }
+
                 yOffset += increment;
             }
         }
-        zOffset += 0.04;
+        zOffset += parseFloat(timeIncrement);
+        colorOffset += 0.04
 
         for (var i = 0 ; i < particles.length ; i++){
             particles[i].update();
@@ -54,11 +72,6 @@ class Particle{
         this.pos = new vec2(Math.floor(Math.random()*canvas.width), Math.floor(Math.random()*canvas.height));
         this.vel = new vec2();
         this.acc = new vec2();
-        this.maxSpeed = 7;
-    }
-
-    applyForce(force){
-        this.acc.add(force);
     }
 
     edges(){
@@ -69,18 +82,17 @@ class Particle{
     }
 
     update(){
-        this.applyForce(flowField.field[Math.floor(this.pos.x/resolution) + Math.floor(this.pos.y/resolution)*cols]);
+        this.acc = flowField.field[Math.floor(this.pos.x/resolution) + Math.floor(this.pos.y/resolution)*cols];
         this.vel.add(this.acc);
-        this.vel.limit(this.maxSpeed);
+        this.vel.limit(particleSpeed);
         this.pos.add(this.vel);
         this.edges();
-        this.acc.mult(0);
     }
 
     draw(){
         ctx.beginPath();
         ctx.arc(this.pos.x, this.pos.y, 5, 0, 2*Math.PI);
-        ctx.fillStyle = "rgb(" + (255 * this.pos.x/canvas.width) + "," + (Math.cos(zOffset)*(255/2) + (255/2)) + "," + (255 * this.pos.y/canvas.height) + ")";;
+        ctx.fillStyle = "rgb(" + (255 * this.pos.x/canvas.width) + "," + (Math.cos(colorOffset)*(255/2) + (255/2)) + "," + (255 * this.pos.y/canvas.height) + ")";;
         ctx.fill();
         ctx.closePath();
     }
