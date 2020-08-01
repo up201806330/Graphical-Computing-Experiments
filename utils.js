@@ -52,10 +52,15 @@ class vec2{
             this.div(Math.sqrt(mgsq));
             this.mult(max);
         }
+        return this;
     }
 
     copy(){
         return new vec2(this.x, this.y);
+    }
+
+    static fromAngle(a){
+        return new vec2(Math.cos(a * Math.PI/180), Math.sin(a * Math.PI/180));
     }
 }
 

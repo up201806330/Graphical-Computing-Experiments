@@ -34,6 +34,10 @@ function main() {
         cardioid.draw();
     }
 
+    if (flowFieldOn){
+        flowField.draw();
+    }
+
     if (spaceOn)    drawSpeed();
     if (cardioidOn) drawFactor();
 

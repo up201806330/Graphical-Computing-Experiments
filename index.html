@@ -28,6 +28,7 @@ oncontextmenu="return false;"></canvas>
     <label for="total" id="totalText" style="display: none;">Number of vertices</label>
     <input oninput="totalTick()" type="range" id="totalSlider" min="10" max="800" value = "100" style="display: none;"></input>
 
+<button type="button" onclick="toggleFlowField()" style="display: block;">Flow Field</button>
 </menu>
 
 <script src="perlin.js"></script>
@@ -38,6 +39,7 @@ oncontextmenu="return false;"></canvas>
 <script src="marchingSquares.js"></script>
 <script src="cardioid.js"></script>
 <script src="toggles.js"></script>
+<script src="flowField.js"></script>
 <script>
     main();
 </script>

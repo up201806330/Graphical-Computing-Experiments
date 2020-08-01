@@ -75,3 +75,11 @@ function toggleCardioid(){
         obstacles.push(new Obstacle(canvas.width/2, canvas.height/2, 135, true));
     }
 }
+var flowFieldOn = false;
+function toggleFlowField(){
+    if (flowFieldOn) flowFieldOn = false;
+    else {
+        flowFieldOn = true;
+        newField();
+    }            
+}
