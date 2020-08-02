@@ -1,5 +1,5 @@
 # Hyperspace
-[Try me!](https://up201806330.github.io/Hyperspace/)
+[Try me!](https://up201806330.github.io/GraphicalComputingExperiments/)
 
 
 Graphical computing experiments
