@@ -41,6 +41,8 @@ oncontextmenu="return false;"></canvas>
 <button type="button" onclick="toggleFlowField()">Flow Field</button>
     <button style="display: none;" type="button" id="vectorsButton" onclick="toggleVectors()">Show Vectors</button>
 
+    <button style="display: none;" type="button" id="tracesButton" onclick="toggleTraces()">Show Traces</button>
+
     <label for="timeIncrement" id="timeIncrementText" style="display: none;">Field time increment</label>
     <input oninput="timeIncrementTick()" type="range" id="timeIncrementSlider" min="0" max="0.02" value = "0" step="0.001" style="display: none;"></input>
 

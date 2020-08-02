@@ -29,7 +29,6 @@ class FlowField{
                 yOffset += increment;
             }
         }
-        //zOffset += 0.01;
     }
 
     draw(){
@@ -72,6 +71,7 @@ class Particle{
         this.pos = new vec2(Math.floor(Math.random()*canvas.width), Math.floor(Math.random()*canvas.height));
         this.vel = new vec2();
         this.acc = new vec2();
+        this.history = new Array();
     }
 
     edges(){
@@ -82,6 +82,9 @@ class Particle{
     }
 
     update(){
+        this.history.push(this.pos.copy());
+        if (this.history.length > 500) this.history.splice(0,1);
+
         this.acc = flowField.field[Math.floor(this.pos.x/resolution) + Math.floor(this.pos.y/resolution)*cols];
         this.vel.add(this.acc);
         this.vel.limit(particleSpeed);
@@ -95,9 +98,20 @@ class Particle{
         ctx.fillStyle = "rgb(" + (255 * this.pos.x/canvas.width) + "," + (Math.cos(colorOffset)*(255/2) + (255/2)) + "," + (255 * this.pos.y/canvas.height) + ")";;
         ctx.fill();
         ctx.closePath();
+
+        if (tracesOn){
+            for (var i = 0 ; i < this.history.length ; i++){
+                var pos = this.history[i];
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, 1, 0, 2*Math.PI);
+                ctx.fillStyle = "rgba(255,255,255,0.2)";
+                ctx.fill();
+                ctx.closePath();
+            }
+        }  
     }
 }
-var particles = new Array(); for (var i = 0 ; i < 800 ; i++) particles[i] = new Particle();
+var particles = new Array(); 
 
 function newField(){
     noise.seed(Math.random());

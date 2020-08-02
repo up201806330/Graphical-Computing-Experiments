@@ -78,7 +78,7 @@ function toggleCardioid(){
 var flowFieldOn = false;
 function toggleFlowField(){
     var particleSpeedtext = document.getElementById("particleSpeedText"), particleSpeedslider = document.getElementById("particleSpeedSlider"), 
-    vectors = document.getElementById("vectorsButton"), 
+    vectors = document.getElementById("vectorsButton"), traces = document.getElementById("tracesButton");
     timeIncrementText = document.getElementById("timeIncrementText"), timeIncrementSlider = document.getElementById("timeIncrementSlider");
     if (flowFieldOn){
         flowFieldOn = false;
@@ -87,6 +87,7 @@ function toggleFlowField(){
         particleSpeedslider.style.display = "none";
 
         vectors.style.display = "none";
+        traces.style.display = "none";
 
         timeIncrementText.style.display = "none";
         timeIncrementSlider.style.display = "none";
@@ -98,6 +99,7 @@ function toggleFlowField(){
         particleSpeedslider.style.display = "inline-block";  
 
         vectors.style.display = "inline-block";  
+        traces.style.display = "inline-block";  
 
         timeIncrementText.style.display = "inline-block";  
         timeIncrementSlider.style.display = "inline-block";    
@@ -111,4 +113,13 @@ function toggleVectors(){
     else {
         vectorsOn = true; 
     } 
+}
+var tracesOn = false;
+function toggleTraces(){
+    if (tracesOn){
+        tracesOn = false;
+    }
+    else {
+        tracesOn = true; 
+    }
 }

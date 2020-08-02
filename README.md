@@ -7,3 +7,4 @@ Graphical computing experiments
 - Boid entities 
 - Animated Marching squares on perlin noise field
 - Animated cardioid
+- Flow field simulation 
