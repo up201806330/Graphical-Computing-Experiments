@@ -27,17 +27,17 @@ oncontextmenu="return false;"></canvas>
     <button type="button" onclick="toggleBoids()">Boids</button>
 </div>
 
+<div class="CARDIOID" style="display: inline-flex;">
+    <button type="button" onclick="toggleCardioid()" >Cardioid</button>
+        <label for="total" id="totalText" style="display: none;">Number of vertices</label>
+        <input oninput="totalTick()" type="range" id="totalSlider" min="10" max="800" value = "100" style="display: none;"></input>
+</div>
+
 <div class="SQUARES">
 <button type="button" onclick="toggleSquares()">Marching squares</button>
     <button type="button" id="dotsButton" onclick="toggleDots()" style="display: none;">Dots</button>
 
     <button type="button" id="interpolationButton" onclick="toggleInterpolation()" style="display: none;">Interpolation</button>
-</div>
-
-<div class="CARDIOID">
-<button type="button" onclick="toggleCardioid()" >Cardioid</button>
-    <label for="total" id="totalText" style="display: none;">Number of vertices</label>
-    <input oninput="totalTick()" type="range" id="totalSlider" min="10" max="800" value = "100" style="display: none;"></input>
 </div>
 
 <div class="FLOW" style="display: inline-flex;">
