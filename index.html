@@ -6,14 +6,17 @@
     <style>
     	* { padding: 0; margin: 0; overflow:hidden;}
     	canvas { background: #000000; display: block; margin: 0 auto; }
+        button { background-color: transparent; border: 10px white; color: white; margin: 5px;}
+        label { color: white; margin: 5px;}
     </style>
 </head>
 <canvas style="position: absolute; top:0; left:0 solid black;" id="myCanvas" width="480" height="480" 
 oncontextmenu="return false;"></canvas>
 
 <menu id="buttons" style="position: relative;">
+    
 <div class="SPACE" style="display: inline-flex;">
-<button type="button" onclick="toggleSpace()">HyperSpace</button>
+<button type="button" onclick="toggleSpace()">HyperSpace </button> 
     <button style="display: none;" type="button" id="speedButton" onclick="toggleSpeed()">Manual Speed</button>
 
     <label for="speed" id="speedText" style="display: none;">Speed</label>
