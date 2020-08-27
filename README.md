@@ -1,4 +1,4 @@
-# Graphical computing experiments
+# Graphical-computing-experiments
 [Try me!](https://up201806330.github.io/GraphicalComputingExperiments/)
 
 ## Starfield simulation 
