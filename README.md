@@ -1,5 +1,5 @@
 # Graphical-computing-experiments
-[Try me!](https://up201806330.github.io/GraphicalComputingExperiments/)
+[Try me!](https://up201806330.github.io/Graphical-Computing-Experiments/)
 
 ## Starfield simulation 
 - [Toggle between manual and cosine wave for speed] 
